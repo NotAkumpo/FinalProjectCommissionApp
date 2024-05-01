@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Commission Detail{% endblock %}
+{% block content %}
+    <body>
+        <h1>Commission Detail - {{ object.commission.title }}</h1>
+        <p>{{ object.entry }}</p>
+    </body>
+{% endblock %}

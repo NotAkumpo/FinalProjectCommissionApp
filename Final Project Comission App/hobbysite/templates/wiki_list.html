@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Wiki List{% endblock %}
+{% block content %}
+    <body>
+        <h1>Wiki:</h1>
+        {% for c in object_list %}
+            <h2>
+            <li>
+                <a href="{{ c.get_absolute_url }}">
+                    {{ c }}
+                </a>
+            </li>
+            </h2>
+        {% endfor %}
+    </body>
+{% endblock %}

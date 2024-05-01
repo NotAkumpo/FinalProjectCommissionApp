@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Merchstore Item{% endblock %}
+{% block content %}
+    <body>
+        <h1>Merchstore Item - {{ object.name }}</h1>
+        <h2>{{ object.price }}</h2>
+        <p>{{ object.description }}</p>
+    </body>
+{% endblock %}

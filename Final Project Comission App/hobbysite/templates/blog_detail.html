@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Blog Detail{% endblock %}
+{% block content %}
+    <body>
+        <h1>Blog Detail - {{ object.category.name }}</h1>
+        <p>{{ object.entry }}</p>
+    </body>
+{% endblock %}
