@@ -9,34 +9,40 @@ class Commission(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
 
-    OPEN = "OPEN"
-    FULL = "FULL"
-    COMPLETED = "COMPLETED"
-    DISCONTINUED = "DISCONTINUED"
+    AOPEN = "AO"
+    BFULL = "BF"
+    CCOMPLETED = "CC"
+    DDISCONTINUED = "DD"
     STATUS_CHOICES = {
-        OPEN: "Open",
-        FULL: "Full",
-        COMPLETED: "Completed",
-        DISCONTINUED: "Discontinued",
+        AOPEN: "Open",
+        BFULL: "Full",
+        CCOMPLETED: "Completed",
+        DDISCONTINUED: "Discontinued",
     }
-    status = models.CharField(max_length=12,choices=STATUS_CHOICES,default=OPEN,)
+    status = models.CharField(max_length=13,choices=STATUS_CHOICES,default=AOPEN,)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-           return self.title
+        return self.title
+
+    def get_created_at(self):
+        return self.created_at
+
+    def get_updated_at(self):
+        return self.updated_at
+
+    def get_description(self):
+        return self.description
 
     def get_absolute_url(self):
-           return reverse('commissions:commission-detail', args=[self.pk])
-
-    def get_status(self):
-        return self.status
+        return reverse('commissions:commission-detail', args=[self.pk])
 
     class Meta:
         ordering = ['created_at']
         verbose_name = 'Commission'
-        verbose_name_plural = 'Comissions'
+        verbose_name_plural = 'Commissions'
 
 
 class Job(models.Model):
@@ -68,19 +74,20 @@ class JobApplication(models.Model):
     job = models.ForeignKey('Job', on_delete=models.CASCADE, related_name='jobApplications')
     applicant = models.ForeignKey('user_management.Profile', on_delete=models.CASCADE, related_name='jobApplications')
 
-    PENDING = "PENDING"
-    ACCEPTED = "ACCEPTED"
-    REJECTED = "REJECTED"
+    APENDING = "AP"
+    BACCEPTED = "BP"
+    CREJECTED = "CR"
     STATUS_CHOICES = {
-        PENDING: "Pending",
-        ACCEPTED: "Accepted",
-        REJECTED: "Rejected",
+        APENDING: "Pending",
+        BACCEPTED: "Accepted",
+        CREJECTED: "Rejected",
     }
-    status = models.CharField(max_length=8,choices=STATUS_CHOICES,default=PENDING,)
+
+    status = models.CharField(max_length=9,choices=STATUS_CHOICES,default=APENDING,)
 
     applied_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ["-status", "-applied_at"]
+        ordering = ["status", "-applied_at"]
         verbose_name = 'Job Application'
         verbose_name_plural = 'Job Applications'

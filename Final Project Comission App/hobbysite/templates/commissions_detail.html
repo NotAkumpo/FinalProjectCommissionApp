@@ -3,7 +3,15 @@
 {% block title %}Commission Detail{% endblock %}
 {% block content %}
     <body>
-        <h1>Commission Detail - {{ object.commission.title }}</h1>
-        <p>{{ object.entry }}</p>
+        <h1>Commission Detail - {{ object.title }}</h1>
+        <h3>Status - {{ object.get_status_display }}</h3>
+        <h3>Created On: {{ object.get_created_at}}</h3>
+        <h3>Last Updated: {{ object.get_updated_at}}</h3>
+        <p><strong>About This Commission: </strong>{{ object.get_description}}</p>
+        &nbsp;
+        <h3>Needed Jobs:</h3>
+        {% for job in object.jobs.all %}
+            <p>{{ job }}</p>
+        {% endfor %}
     </body>
 {% endblock %}

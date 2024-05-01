@@ -10,9 +10,14 @@
                 <a href="{{ c.get_absolute_url }}">
                     {{ c }}
                 </a>
-                - {{ c.get_status }}
+                - {{ c.get_status_display }}
             </li>
             </h2>
         {% endfor %}
+        {% if request.user.is_authenticated %}
+            <h1>Created Commissions:</h1>
+            <h1>Applied Commissions:</h1>
+        {% else %}
+        {% endif %} 
     </body>
 {% endblock %}
