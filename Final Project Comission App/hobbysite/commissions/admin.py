@@ -9,11 +9,16 @@ class JobInLine(admin.TabularInline):
 
 class CommissionAdmin(admin.ModelAdmin):
     model = Commission
+    exclude = ('author',)
     inlines = [JobInLine,]
 
     search_fields = ['title',]
     list_display = ['title', 'status',]
     list_filter = ['title', 'status',] 
+
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user.profile
+        super().save_model(request, obj, form, change)
 
 
 class JobAdmin(admin.ModelAdmin):

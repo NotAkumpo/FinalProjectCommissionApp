@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Commission</title>
+    <head>
+    <body>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <button>Submit</button>
+        </form>
+    </body>
+</html>

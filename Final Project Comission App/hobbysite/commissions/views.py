@@ -12,7 +12,7 @@ from .forms import CommissionForm
 class CommissionListView(ListView):
     model = Commission
     template_name = 'commissions_list.html'
-    ordering = ['status','created_at']
+    ordering = ['status','-created_at']
     
 
 class CommissionDetailView(DetailView):

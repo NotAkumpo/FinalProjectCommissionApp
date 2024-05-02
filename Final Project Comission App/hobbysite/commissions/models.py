@@ -8,6 +8,7 @@ from django.urls import reverse
 class Commission(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
+    author = models.ForeignKey('user_management.Profile', on_delete=models.SET_NULL, null=True, related_name='commissions')
 
     AOPEN = "AO"
     BFULL = "BF"
@@ -26,15 +27,6 @@ class Commission(models.Model):
 
     def __str__(self):
         return self.title
-
-    def get_created_at(self):
-        return self.created_at
-
-    def get_updated_at(self):
-        return self.updated_at
-
-    def get_description(self):
-        return self.description
 
     def get_absolute_url(self):
         return reverse('commissions:commission-detail', args=[self.pk])
