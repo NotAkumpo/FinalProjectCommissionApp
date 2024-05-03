@@ -10,9 +10,21 @@
         <h3>Last Updated: {{ object.updated_at}}</h3>
         <p><strong>About This Commission: </strong>{{ object.description}}</p>
         &nbsp;
-        <h3>Needed Jobs:</h3>
+        <h2>Needed Jobs:</h2>
         {% for job in object.jobs.all %}
-            <p>{{ job }}</p>
+            <h3><p>{{ job }} - {{ job.manpowerRequired }}</p><h3>
         {% endfor %}
+        <h2>Total Manpower Required for Commission: {{ total_manpower }}</h2>
+        {% if request.user.is_authenticated %}
+        <h1>Application Form:</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <button>Apply to Job</button>
+        </form>
+        {% endif %}
+        {% if request.user.is_authenticated and request.user.profile == object.author %}
+            <h1><a href="{% url 'commissions:commission-update' object.pk %}">Edit Commission</a></h1>
+        {% endif %}
     </body>
 {% endblock %}

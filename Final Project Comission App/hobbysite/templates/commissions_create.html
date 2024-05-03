@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Create Commission</title>
-    <head>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Commission Create{% endblock %}
+{% block content %}
     <body>
         <form method="POST">
             {% csrf_token %}
@@ -11,3 +10,4 @@
         </form>
     </body>
 </html>
+{% endblock %}

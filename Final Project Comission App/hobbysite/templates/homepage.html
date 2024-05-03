@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Update Commission{% endblock %}
+{% block content %}
+    <body>
+        <h1>Homepage</h1>
+        <h2>Merchandise Store: </h2>
+
+        <h3><li><a href="{% url 'commissions:commission-list' %}">
+            List of Merchstore Items
+        </a></li></h3>
+
+        <h3><li><a href="{% url 'commissions:commission-list' %}">
+            Add a Merchstore Item
+        </a></li></h3>
+
+        <h3><li><a href="{% url 'commissions:commission-list' %}">
+            Merchstore Cart
+        </a></li></h3>
+
+        <h3><li><a href="{% url 'commissions:commission-list' %}">
+            Merchstore Transactions List
+        </a></li></h3>
+
+        <h2>Online Wiki: </h2>
+
+        <h3><li><a href="{% url 'commissions:commission-list' %}">
+            List of Wiki Articles
+        </a></li></h3>
+
+        <h3><li><a href="{% url 'commissions:commission-list' %}">
+            Add a Wiki Article
+        </a></li></h3>
+
+        <h2>Blog: </h2>
+
+        <h3><li><a href="{% url 'commissions:commission-list' %}">
+            List of Blog Articles
+        </a></li></h3>
+
+        <h3><li><a href="{% url 'commissions:commission-list' %}">
+            Add a Blog Article
+        </a></li></h3>
+
+        <h2>Commission: </h2>
+
+        <h3><li><a href="{% url 'commissions:commission-list' %}">
+            List of Commissions
+        </a></li></h3>
+
+        <h3><li><a href="{% url 'commissions:commission-create' %}">
+            Add a Commission
+        </a></li></h3>
+
+    </body>
+{% endblock %}

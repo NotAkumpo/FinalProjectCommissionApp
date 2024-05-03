@@ -25,5 +25,6 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),
     path('commissions/', include('commissions.urls', namespace="commissions")),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('profile', include('user_management.urls', namespace="user_management")),
+    path('profile/', include('user_management.urls', namespace="user_management")),
+    path('homepage/', include('homepage.urls', namespace="homepage")),
 ]
