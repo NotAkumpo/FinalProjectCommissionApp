@@ -16,7 +16,8 @@
         {% endfor %}
 
         {% if request.user.is_authenticated %}
-            <h1>Created Commissions:</h1>
+            <h2>Current User: {{ user.profile }}</h2>
+            <h2>Created Commissions:</h2>
             {% for d in user.profile.commissions.all %}
                 <h4>
                 <li>
@@ -28,7 +29,7 @@
                 </h4>
             {% endfor %}
 
-            <h1>Applied Commissions:</h1>
+            <h2>Applied Commissions:</h2>
             {% for e in user.profile.jobApplications.all %}
                 <h4>
                 <li>
@@ -44,7 +45,7 @@
 
         <h2>
             <a href="{% url 'commissions:commission-create' %}">
-                Make a Commission
+                Make a New Commission
             </a>
         </h2>
     </body>

@@ -4,8 +4,15 @@
 {% block content %}
     <body>
         <form method="POST">
+        <h2>Create a Commission: </h2>
             {% csrf_token %}
             {{ form.as_div }}
+        <h2>Jobs for this Commission (Leave Blank If Not Needed):</h2>
+            {{ job_formset.management_form }}
+            {% for job_form in job_formset %}
+            <h3>Create Job: </h3>
+                {{ job_form.as_div }}
+            {% endfor %}
             <button>Submit</button>
         </form>
     </body>

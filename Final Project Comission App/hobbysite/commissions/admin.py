@@ -9,7 +9,7 @@ class JobInLine(admin.TabularInline):
 
 class CommissionAdmin(admin.ModelAdmin):
     model = Commission
-    exclude = ('author',)
+    exclude = ('author','openManpower')
     inlines = [JobInLine,]
 
     search_fields = ['title',]
@@ -24,6 +24,7 @@ class CommissionAdmin(admin.ModelAdmin):
 class JobAdmin(admin.ModelAdmin):
     model = Job
 
+    exclude = ['openManpower']
     search_fields = ['role', 'commission',]
     list_display = ['role', 'commission', 'status', 'manpowerRequired']
     list_filter = ['role', 'commission',] 

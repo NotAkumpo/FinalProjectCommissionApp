@@ -3,20 +3,23 @@
 {% block title %}Commission Detail{% endblock %}
 {% block content %}
     <body>
-        <h1>Commission Detail - {{ object.title }}</h1>
+        <h1>{{ object.title }} Commission</p></h1>
         <h3>Author - {{ object.author }}</h3>
         <h3>Status - {{ object.get_status_display }}</h3>
-        <h3>Created On: {{ object.created_at}}</h3>
-        <h3>Last Updated: {{ object.updated_at}}</h3>
-        <p><strong>About This Commission: </strong>{{ object.description}}</p>
+        <p><strong>Created On:</strong> {{ object.created_at}}</p>
+        <p><strong>Last Updated:</strong> {{ object.updated_at}}</p>
+        <p><strong>Total Manpower Required for Commission: </strong>{{ total_manpower }}</p>
+        <p><strong>Open Manpower for Commission: </strong>{{ object.openManpower }}</p>
         &nbsp;
-        <h2>Needed Jobs:</h2>
+        <h2>List of Jobs Needed:</h2>
         {% for job in object.jobs.all %}
-            <h3><p>{{ job }} - {{ job.manpowerRequired }}</p><h3>
+            <h3><p>{{ job }}</p></h3>
+            <li>Total Manpower Needed:  {{ job.manpowerRequired }}</li>
+            <li>Open Manpower:  {{ job.openManpower }}</li>
         {% endfor %}
-        <h2>Total Manpower Required for Commission: {{ total_manpower }}</h2>
         {% if request.user.is_authenticated %}
-        <h1>Application Form:</h1>
+        <h2>Application Form:</h2>
+        <p><strong>Current User: </strong> {{ user.profile }}</p>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_div }}
@@ -24,7 +27,7 @@
         </form>
         {% endif %}
         {% if request.user.is_authenticated and request.user.profile == object.author %}
-            <h1><a href="{% url 'commissions:commission-update' object.pk %}">Edit Commission</a></h1>
+            <h2><a href="{% url 'commissions:commission-update' object.pk %}">Edit This Commission</a></h2>
         {% endif %}
     </body>
 {% endblock %}

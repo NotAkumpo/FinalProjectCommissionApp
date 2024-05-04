@@ -1,14 +1,17 @@
 from datetime import datetime
 from django.db import models
 from django.urls import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
 
 class Commission(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, unique=True)
     description = models.TextField()
     author = models.ForeignKey('user_management.Profile', on_delete=models.SET_NULL, null=True, related_name='commissions')
+    openManpower = models.IntegerField(default=0)
 
     AOPEN = "AO"
     BFULL = "BF"
@@ -39,8 +42,14 @@ class Commission(models.Model):
 
 class Job(models.Model):
     commission = models.ForeignKey('Commission', on_delete=models.CASCADE, related_name='jobs')
-    role = models.CharField(max_length=255, unique=True)
+    role = models.CharField(max_length=255)
     manpowerRequired = models.IntegerField()
+    openManpower = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            self.openManpower = self.manpowerRequired
+        super().save(*args, **kwargs)
 
     OPEN = "OPEN"
     FULL = "FULL"
@@ -83,3 +92,22 @@ class JobApplication(models.Model):
         ordering = ["status", "-applied_at"]
         verbose_name = 'Job Application'
         verbose_name_plural = 'Job Applications'
+
+
+@receiver(post_save, sender=JobApplication)
+def update_job_manpower(sender, instance, created, **kwargs):
+    if instance.status == JobApplication.BACCEPTED:
+        instance.job.openManpower -= 1
+        if instance.job.openManpower == 0:
+            instance.job.status = Job.FULL
+        instance.job.save()
+
+
+@receiver(post_save, sender=Job)
+def update_commission_manpower(sender, instance, created, **kwargs):
+    commission = instance.commission
+    jobs = Job.objects.filter(commission=commission)
+    commission.openManpower = sum(job.openManpower for job in jobs)
+    if commission.openManpower == 0:
+        commission.status = Commission.BFULL
+    commission.save()
