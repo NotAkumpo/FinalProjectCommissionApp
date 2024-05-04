@@ -22,6 +22,7 @@ class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = ['role', 'manpowerRequired', 'status']
+        
 
 class JobApplicationForm(forms.ModelForm):
     class Meta:

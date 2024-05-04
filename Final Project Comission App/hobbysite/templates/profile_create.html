@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Profile Create{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile Create</title>
+    <head>
+    <body>
+        <p>{{ object }}</p>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <button>Submit</button>
+        </form>
+    </body>
+</html>
+{% endblock %}

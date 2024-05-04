@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Update Commission{% endblock %}
+{% block title %}Homepage{% endblock %}
 {% block content %}
     <body>
         <h1>Homepage</h1>
@@ -51,6 +51,25 @@
         <h3><li><a href="{% url 'commissions:commission-create' %}">
             Add a Commission
         </a></li></h3>
+
+        <h2>User Management: </h2>
+
+        <h3><li><a href="{% url 'admin:index' %}">
+            Admin
+        </a></li></h3>
+
+        <h3><li><a href="{% url 'login' %}">
+            Login
+        </a></li></h3>
+
+        <h3><li><a href="{% url 'user_management:user-create' %}">
+            Register a User
+        </a></li></h3>
+
+        <h3><li><a href="{% url 'user_management:profile-create' %}">
+            Create a Profile
+        </a></li></h3>
+
 
     </body>
 {% endblock %}

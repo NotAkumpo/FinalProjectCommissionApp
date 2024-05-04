@@ -1,14 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}User Create{% endblock %}
+{% block content %}
 <!DOCTYPE html>
 <html>
     <head>
-        <title>User Detail</title>
+        <title>User Create</title>
     <head>
     <body>
         <p>{{ object }}</p>
         <form action="" method="POST">
+            <h2>Create a User: </h2>
             {% csrf_token %}
             {{ form.as_div }}
             <button>Submit</button>
         </form>
     </body>
 </html>
+{% endblock %}
