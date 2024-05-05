@@ -11,7 +11,7 @@ class Commission(models.Model):
     title = models.CharField(max_length=255, unique=True)
     description = models.TextField()
     author = models.ForeignKey('user_management.Profile', on_delete=models.SET_NULL, null=True, related_name='commissions')
-    openManpower = models.IntegerField(default=0)
+    openManpower = models.PositiveIntegerField(default=0)
 
     AOPEN = "AO"
     BFULL = "BF"
@@ -43,8 +43,8 @@ class Commission(models.Model):
 class Job(models.Model):
     commission = models.ForeignKey('Commission', on_delete=models.CASCADE, related_name='jobs')
     role = models.CharField(max_length=255)
-    manpowerRequired = models.IntegerField()
-    openManpower = models.IntegerField(default=0)
+    manpowerRequired = models.PositiveIntegerField()
+    openManpower = models.PositiveIntegerField(default=0)
 
     def save(self, *args, **kwargs):
         if self.pk is None:

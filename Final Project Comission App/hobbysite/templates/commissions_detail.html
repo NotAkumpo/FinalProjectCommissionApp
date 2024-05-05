@@ -6,6 +6,7 @@
         <h1>{{ object.title }} Commission</p></h1>
         <h3>Author - {{ object.author }}</h3>
         <h3>Status - {{ object.get_status_display }}</h3>
+        <p><strong>Commission Description: </strong> {{ object.description}}</p>
         <p><strong>Created On:</strong> {{ object.created_at}}</p>
         <p><strong>Last Updated:</strong> {{ object.updated_at}}</p>
         <p><strong>Total Manpower Required for Commission: </strong>{{ total_manpower }}</p>
